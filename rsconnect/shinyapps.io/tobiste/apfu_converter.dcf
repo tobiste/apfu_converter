@@ -1,0 +1,13 @@
+name: apfu_converter
+title: apfu_converter
+username: tobiste
+account: tobiste
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 11845525
+bundleId: 8533260
+url: https://tobiste.shinyapps.io/apfu_converter/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: chlorite_example.xlsx|test.R

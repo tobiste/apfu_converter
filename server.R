@@ -1,5 +1,4 @@
 function(input, output) {
-
   load_file <- reactive({
     inFile <- input$file
 
@@ -12,7 +11,7 @@ function(input, output) {
 
   number_oxygen <- reactive({
     nO <- input$nO
-    if(!is.integer(nO)){
+    if (!is.integer(nO)) {
       round(nO)
     } else {
       nO
@@ -22,7 +21,7 @@ function(input, output) {
 
   number_digits <- reactive({
     nd <- input$round
-    if(is.na(input$round)){
+    if (is.na(input$round)) {
       Inf
     } else {
       nd
@@ -47,16 +46,36 @@ function(input, output) {
   })
 
 
+  result <- reactive({
+    if (!is.null(load_file())) {
+      if (input$output_type == "apfu") {
+        df <- convert_wt2apfu()
+      } else {
+        df <- convert_wt2mol()
+      }
+    } else {
+      df <- NULL
+    }
+
+    validate(
+      need(!is.null(df), "No data")
+    )
+
+
+    return(df)
+  })
 
 
   output$apfu_dt <- renderDataTable({
-    if(input$output_type == "apfu"){
-      convert_wt2apfu()
-    } else{
-        convert_wt2mol()
-      }
-    })
+    result()
+  })
 
-
-
+  output$download <- downloadHandler(
+    filename = function() {
+      "converted_data.csv"
+    },
+    content = function(fname) {
+      write.csv(result(), fname)
+    }
+  )
 }

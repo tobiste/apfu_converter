@@ -1,5 +1,5 @@
 # Mineral formulae -------------------------------------
-
+library(shiny)
 library(stringr)
 library(dplyr)
 library(PeriodicTable)
@@ -40,17 +40,17 @@ apfu <- function(x, n_oxygen) {
 }
 
 
-wt_to_molwt <- function(x){
+wt_to_molwt <- function(x) {
   oxides <- names(x)
 
-  f = oxides |>
+  f <- oxides |>
     sapply(identify_oxide) |>
     t()
 
   ox_molwt <- sapply(oxides, molecular_weight)
   wt <- as.matrix(x)
 
-  res = wt/ox_molwt * 100 * as.numeric(f[, 2])
+  res <- wt / ox_molwt * 100 * as.numeric(f[, 2])
   colnames(res) <- as.character(f[, 1])
   res
 }
