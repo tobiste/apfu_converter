@@ -4,7 +4,7 @@ Upload your data as `*.xlsx` (Excel) file and convert.
 
 
 ## Run in browser:
-](https://tobiste.shinyapps.io/apfu_converter/)
+https://tobiste.shinyapps.io/apfu_converter/
 
 (no need to install R)
 
